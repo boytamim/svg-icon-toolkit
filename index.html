@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVG Icon Toolkit</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="dark-theme">
+    <div class="app-layout">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar-nav">
+            <div class="nav-brand">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            </div>
+            <div class="nav-links">
+                <a href="https://github.com/boytamim/svg-icon-toolkit" target="_blank" title="GitHub Repository">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                </a>
+            </div>
+        </nav>
+
+        <!-- Settings Panel (Upload & Customize) -->
+        <aside class="settings-panel">
+            <div class="panel-header">
+                <h2>Toolkit Settings</h2>
+            </div>
+            
+            <div class="panel-section upload-section">
+                <h3>Upload SVGs</h3>
+                <div class="drop-zone" id="drop-zone">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+                    <p>Drag & drop files</p>
+                    <label for="file-input" class="btn btn-primary btn-sm">Browse Files</label>
+                    <input type="file" id="file-input" accept=".svg" multiple hidden>
+                </div>
+                <div id="upload-error" class="error-message hidden"></div>
+                
+                <div class="validation-note">
+                    <strong>Note:</strong> Validation checks for basic SVG structure. It does not perform comprehensive security auditing or sanitize malicious scripts.
+                </div>
+            </div>
+
+            <div class="panel-section controls-section disabled" id="controls-section">
+                <h3>Customization</h3>
+                
+                <div class="control-group">
+                    <label for="icon-size">Size (<span id="size-value">48</span>px)</label>
+                    <input type="range" id="icon-size" min="12" max="256" value="48">
+                </div>
+
+                <div class="control-group">
+                    <label for="icon-color">Fill Color</label>
+                    <div class="color-picker-wrapper">
+                        <input type="color" id="icon-color" value="#e2e8f0">
+                        <span id="color-hex">#e2e8f0</span>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label>Preview Background</label>
+                    <div class="toggle-group bg-toggles">
+                        <button class="toggle-btn" data-bg="light">Light</button>
+                        <button class="toggle-btn" data-bg="dark">Dark</button>
+                        <button class="toggle-btn active" data-bg="checkerboard">Check</button>
+                    </div>
+                </div>
+
+                <div class="actions">
+                    <button class="btn btn-outline" id="reset-btn">Reset</button>
+                    <button class="btn btn-primary" id="export-all-btn">Export All Custom</button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content (Preview Grid) -->
+        <main class="main-content">
+            <header class="preview-header">
+                <h2>Icon Preview</h2>
+                <span class="file-count" id="file-count">0 files</span>
+            </header>
+            
+            <div class="preview-grid" id="preview-grid">
+                <!-- Empty state -->
+                <div class="empty-state" id="empty-state">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242M12 12v9M8 17l4-4 4 4"/></svg>
+                    <h3>No icons uploaded</h3>
+                    <p>Upload some SVG files to preview and customize them.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Template for SVG card -->
+    <template id="svg-card-template">
+        <div class="svg-card">
+            <div class="card-preview preview-bg-checkerboard">
+                <div class="svg-wrapper"></div>
+            </div>
+            <div class="card-info">
+                <span class="file-name" title="">filename.svg</span>
+                <span class="validation-badge">Valid</span>
+            </div>
+            <div class="card-actions">
+                <button class="btn btn-sm btn-outline download-original" title="Download Original">Original</button>
+                <button class="btn btn-sm btn-primary download-custom" title="Download Customized">Custom</button>
+            </div>
+        </div>
+    </template>
+
+    <script src="script.js"></script>
+</body>
+</html>
